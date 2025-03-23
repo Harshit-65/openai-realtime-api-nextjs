@@ -70,6 +70,10 @@ export const en = {
                 description: 'Say "Show neon glow" for a futuristic energy particle animation!',
                 name: "Neon Glow Effect"
             },
+            weather: {
+                description: 'Say "What\'s the weather in [city]?" to get real-time weather information.',
+                name: "Weather"
+            },
             themeSwitcher: {
                 description: 'Say "Change background" or "Switch to dark mode" or "Switch to light mode".',
                 name: "Theme Switcher"
@@ -108,6 +112,14 @@ export const en = {
             success: "Neon glow effect activated",
             toast: "Neon Glow Effect!",
             failed: "Failed to create neon glow effect"
+        },
+        weather: {
+            fetching: "Fetching weather...",
+            wait: "Please wait a moment",
+            success: "Weather Information",
+            retrieved: "Current weather information retrieved",
+            failed: "Failed to get weather",
+            error: "Error fetching weather data"
         },
         switchTheme: "Theme switched to ",
         themeFailed: "Failed to switch theme",

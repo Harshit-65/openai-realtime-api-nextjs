@@ -34,6 +34,15 @@ const toolDefinitions = {
         description: 'Creates a futuristic neon glow effect with upward moving particles and trails',
         parameters: {}
     },
+    getWeather: {
+        description: 'Fetches and announces the real-time weather of a specified city',
+        parameters: {
+            city: {
+                type: 'string',
+                description: 'The name of the city to get weather for'
+            }
+        }
+    },
     launchWebsite: {
         description: 'Launches a website in the user\'s browser',
         parameters: {

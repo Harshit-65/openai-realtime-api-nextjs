@@ -40,6 +40,10 @@ export function ToolsEducation() {
       description: t('tools.availableTools.neonGlow.description') || "Say \"Show neon glow\" for a futuristic energy particle animation!",
     },
     {
+      name: t('tools.availableTools.weather.name') || "Weather",
+      description: t('tools.availableTools.weather.description') || "Say \"What's the weather in [city]?\" to get real-time weather information.",
+    },
+    {
       name: t('tools.availableTools.launchWebsite.name'),
       description: t('tools.availableTools.launchWebsite.description'),
     },

@@ -45,6 +45,7 @@ const App: React.FC = () => {
         backgroundFunction: 'changeBackgroundColor',
         partyFunction: 'partyMode',
         neonGlowFunction: 'neonGlow',
+        getWeather: 'getWeather',
         launchWebsite: 'launchWebsite', 
         copyToClipboard: 'copyToClipboard',
         scrapeWebsite: 'scrapeWebsite',

@@ -298,6 +298,85 @@ export const useToolsFunctions = () => {
     }
   }
 
+  const getWeather = async ({ city }: { city: string }) => {
+    try {
+      const API_KEY = process.env.NEXT_PUBLIC_OPENWEATHER_API_KEY;
+      
+      if (!API_KEY) {
+        throw new Error("Weather API key is not configured");
+      }
+      
+      // Fetch weather data from OpenWeatherMap API
+      toast.info(t('tools.weather.fetching') || `Fetching weather for ${city}...`, {
+        description: t('tools.weather.wait') || "Please wait a moment",
+      });
+      
+      const response = await fetch(
+        `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(city)}&appid=${API_KEY}&units=metric`
+      );
+      
+      if (!response.ok) {
+        throw new Error(`Error fetching weather: ${response.statusText}`);
+      }
+      
+      const data = await response.json();
+      
+      // Extract relevant weather information
+      const { 
+        main: { temp, feels_like, humidity },
+        weather: [{ description, icon }],
+        wind: { speed },
+        name,
+        sys: { country }
+      } = data;
+      
+      // Format weather description
+      const tempF = (temp * 9/5 + 32).toFixed(1); // Convert to Fahrenheit
+      const weatherDescription = description.charAt(0).toUpperCase() + description.slice(1);
+      const weatherIcon = `https://openweathermap.org/img/wn/${icon}@2x.png`;
+      
+      // Create weather message
+      const weatherMessage = `
+        Current weather in ${name}, ${country}:
+        🌡️ Temperature: ${temp.toFixed(1)}°C (${tempF}°F)
+        🌡️ Feels like: ${feels_like.toFixed(1)}°C
+        💧 Humidity: ${humidity}%
+        💨 Wind speed: ${speed} m/s
+        ☁️ Conditions: ${weatherDescription}
+      `;
+      
+      toast.success(t('tools.weather.success') || `Weather for ${city}`, {
+        description: t('tools.weather.retrieved') || "Current weather information retrieved",
+      });
+      
+      return {
+        success: true,
+        city: name,
+        country,
+        temperature: {
+          celsius: temp.toFixed(1),
+          fahrenheit: tempF
+        },
+        feelsLike: feels_like.toFixed(1),
+        humidity,
+        windSpeed: speed,
+        description: weatherDescription,
+        icon: weatherIcon,
+        message: weatherMessage
+      };
+    } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : "Unknown error";
+      toast.error(t('tools.weather.failed') || "Failed to get weather", {
+        description: errorMessage,
+      });
+      
+      return {
+        success: false,
+        message: `Failed to get weather information: ${errorMessage}`
+      };
+    }
+  }
+
   const launchWebsite = ({ url }: { url: string }) => {
     window.open(url, '_blank')
     toast(t('tools.launchWebsite') + " 🌐", {
@@ -361,6 +440,7 @@ export const useToolsFunctions = () => {
     backgroundFunction,
     partyFunction,
     neonGlowFunction,
+    getWeather,
     launchWebsite,
     copyToClipboard,
     scrapeWebsite,
