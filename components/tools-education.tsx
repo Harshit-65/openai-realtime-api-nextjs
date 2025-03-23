@@ -36,6 +36,10 @@ export function ToolsEducation() {
       description: t('tools.availableTools.partyMode.description'),
     },
     {
+      name: t('tools.availableTools.neonGlow.name') || "Neon Glow Effect",
+      description: t('tools.availableTools.neonGlow.description') || "Say \"Show neon glow\" for a futuristic energy particle animation!",
+    },
+    {
       name: t('tools.availableTools.launchWebsite.name'),
       description: t('tools.availableTools.launchWebsite.description'),
     },

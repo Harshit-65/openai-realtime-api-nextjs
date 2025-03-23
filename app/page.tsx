@@ -44,6 +44,7 @@ const App: React.FC = () => {
         timeFunction: 'getCurrentTime',
         backgroundFunction: 'changeBackgroundColor',
         partyFunction: 'partyMode',
+        neonGlowFunction: 'neonGlow',
         launchWebsite: 'launchWebsite', 
         copyToClipboard: 'copyToClipboard',
         scrapeWebsite: 'scrapeWebsite',

@@ -30,6 +30,10 @@ const toolDefinitions = {
         description: 'Triggers a confetti animation on the page',
         parameters: {}
     },
+    neonGlow: {
+        description: 'Creates a futuristic neon glow effect with upward moving particles and trails',
+        parameters: {}
+    },
     launchWebsite: {
         description: 'Launches a website in the user\'s browser',
         parameters: {

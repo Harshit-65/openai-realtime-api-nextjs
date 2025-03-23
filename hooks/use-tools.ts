@@ -138,6 +138,166 @@ export const useToolsFunctions = () => {
     }
   }
 
+  const neonGlowFunction = () => {
+    try {
+      // Create canvas element for neon glow effect
+      const canvas = document.createElement('canvas');
+      canvas.style.position = 'fixed';
+      canvas.style.top = '0';
+      canvas.style.left = '0';
+      canvas.style.width = '100%';
+      canvas.style.height = '100%';
+      canvas.style.pointerEvents = 'none'; // Let user interact with elements beneath
+      canvas.style.zIndex = '9999';
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      document.body.appendChild(canvas);
+      
+      const ctx = canvas.getContext('2d');
+      if (!ctx) {
+        throw new Error('Could not get canvas context');
+      }
+      
+      // Neon colors
+      const neonColors = [
+        '#FF00FF', // Pink
+        '#00FFFF', // Cyan
+        '#39FF14', // Green
+        '#FF3131', // Red
+        '#4D4DFF', // Blue
+        '#FFF01F'  // Yellow
+      ];
+      
+      // Particle class
+      class Particle {
+        x: number;
+        y: number;
+        size: number;
+        speedX: number;
+        speedY: number;
+        color: string;
+        alpha: number;
+        pulseDirection: number;
+        trail: Array<{x: number, y: number}>;
+        hasTrail: boolean;
+        
+        constructor() {
+          this.x = Math.random() * canvas.width;
+          this.y = canvas.height + Math.random() * 20; // Start below the screen
+          this.size = Math.random() * 3 + 2;
+          this.speedX = (Math.random() - 0.5) * 3;
+          this.speedY = -(Math.random() * 3 + 1); // Negative for upward motion
+          this.color = neonColors[Math.floor(Math.random() * neonColors.length)];
+          this.alpha = Math.random() * 0.5 + 0.5;
+          this.pulseDirection = Math.random() > 0.5 ? 1 : -1;
+          this.trail = [];
+          this.hasTrail = Math.random() > 0.7; // Only some particles have trails
+        }
+        
+        update() {
+          // Update position
+          this.x += this.speedX;
+          this.y += this.speedY;
+          
+          // Pulse size
+          this.size += 0.05 * this.pulseDirection;
+          if (this.size > 5 || this.size < 2) {
+            this.pulseDirection *= -1;
+          }
+          
+          // Update trail
+          if (this.hasTrail) {
+            this.trail.push({x: this.x, y: this.y});
+            if (this.trail.length > 5) {
+              this.trail.shift();
+            }
+          }
+        }
+        
+        draw(ctx: CanvasRenderingContext2D) {
+          // Draw trail
+          if (this.hasTrail && this.trail.length > 1) {
+            ctx.beginPath();
+            ctx.moveTo(this.trail[0].x, this.trail[0].y);
+            for (let i = 1; i < this.trail.length; i++) {
+              ctx.lineTo(this.trail[i].x, this.trail[i].y);
+            }
+            ctx.strokeStyle = this.color;
+            ctx.lineWidth = this.size / 2;
+            ctx.stroke();
+          }
+          
+          // Draw particle
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+          ctx.fillStyle = this.color;
+          ctx.shadowColor = this.color;
+          ctx.shadowBlur = 15;
+          ctx.globalAlpha = this.alpha;
+          ctx.fill();
+          ctx.shadowBlur = 0;
+          ctx.globalAlpha = 1;
+        }
+      }
+      
+      // Array of particles
+      const particles: Particle[] = [];
+      const maxParticles = 100;
+      
+      // Initialize with some particles
+      for (let i = 0; i < maxParticles; i++) {
+        particles.push(new Particle());
+      }
+      
+      // Animation function
+      const animate = () => {
+        // Apply semi-transparent background for trailing effect
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        
+        // Update and draw particles
+        for (let i = 0; i < particles.length; i++) {
+          particles[i].update();
+          particles[i].draw(ctx);
+          
+          // Replace particles that are off-screen
+          if (particles[i].y < -10 || particles[i].x < -10 || particles[i].x > canvas.width + 10) {
+            particles[i] = new Particle();
+          }
+        }
+      };
+      
+      // Start animation
+      const animationDuration = 10000; // 10 seconds
+      const startTime = Date.now();
+      
+      function animationLoop() {
+        if (Date.now() - startTime < animationDuration) {
+          animate();
+          requestAnimationFrame(animationLoop);
+        } else {
+          document.body.removeChild(canvas);
+        }
+      }
+      
+      animationLoop();
+      
+      toast.success("Neon Glow Effect! ✨", {
+        description: "Futuristic energy particles activated!",
+      });
+      
+      return { 
+        success: true, 
+        message: "Created a futuristic neon glow effect with upward moving particles, trailing lines, and pulsing animations." 
+      };
+    } catch (error) {
+      return { 
+        success: false, 
+        message: `Failed to create neon glow effect: ${error}` 
+      };
+    }
+  }
+
   const launchWebsite = ({ url }: { url: string }) => {
     window.open(url, '_blank')
     toast(t('tools.launchWebsite') + " 🌐", {
@@ -200,6 +360,7 @@ export const useToolsFunctions = () => {
     timeFunction,
     backgroundFunction,
     partyFunction,
+    neonGlowFunction,
     launchWebsite,
     copyToClipboard,
     scrapeWebsite,

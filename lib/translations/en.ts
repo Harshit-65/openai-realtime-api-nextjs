@@ -66,6 +66,10 @@ export const en = {
                 description: 'Say "Start party mode" for a dynamic confetti animation!',
                 name: "Party Mode"
             },
+            neonGlow: {
+                description: 'Say "Show neon glow" for a futuristic energy particle animation!',
+                name: "Neon Glow Effect"
+            },
             themeSwitcher: {
                 description: 'Say "Change background" or "Switch to dark mode" or "Switch to light mode".',
                 name: "Theme Switcher"
@@ -98,6 +102,12 @@ export const en = {
             success: "Party mode activated",
             toast: "Party mode!",
             failed: "Failed to activate party mode",
+        },
+        neonGlow: {
+            description: "Failed to create neon glow effect",
+            success: "Neon glow effect activated",
+            toast: "Neon Glow Effect!",
+            failed: "Failed to create neon glow effect"
         },
         switchTheme: "Theme switched to ",
         themeFailed: "Failed to switch theme",
