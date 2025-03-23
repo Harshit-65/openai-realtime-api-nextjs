@@ -13,10 +13,15 @@ import { ToolsEducation } from "@/components/tools-education"
 import { TextInput } from "@/components/text-input"
 import { motion } from "framer-motion"
 import { useToolsFunctions } from "@/hooks/use-tools"
+import { FormModal } from "@/components/FormModal"
+import { useForm } from "@/hooks/use-form"
 
 const App: React.FC = () => {
   // State for voice selection
   const [voice, setVoice] = useState("ash")
+  
+  // Get form state and handlers
+  const { isFormOpen, setIsFormOpen, handleFormSubmit } = useForm();
 
   // WebRTC Audio Session Hook
   const {
@@ -41,10 +46,14 @@ const App: React.FC = () => {
         partyFunction: 'partyMode',
         launchWebsite: 'launchWebsite', 
         copyToClipboard: 'copyToClipboard',
-        scrapeWebsite: 'scrapeWebsite'
+        scrapeWebsite: 'scrapeWebsite',
+        showForm: 'showForm',
+        getLastFormSubmission: 'getLastFormSubmission'
       };
       
-      registerFunction(functionNames[name], func);
+      if (functionNames[name]) {
+        registerFunction(functionNames[name], func);
+      }
     });
   }, [registerFunction, toolsFunctions])
 
@@ -95,6 +104,13 @@ const App: React.FC = () => {
           <ToolsEducation />
         </div>
       </motion.div>
+
+      {/* Form Modal */}
+      <FormModal 
+        isOpen={isFormOpen}
+        onClose={() => setIsFormOpen(false)}
+        onSubmit={handleFormSubmit}
+      />
     </main>
   )
 }

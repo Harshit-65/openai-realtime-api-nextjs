@@ -73,6 +73,14 @@ export const en = {
             scrapeWebsite: {
                 name: "Website Scraper",
                 description: 'Say "Scrape [website URL]" to extract content from a webpage.'
+            },
+            showForm: {
+                name: "Show Form",
+                description: 'Say "Show me a form" to display a form to collect information.'
+            },
+            getLastForm: {
+                name: "Last Form Submission",
+                description: 'Say "When was the last form submitted?" to get the timestamp of the last form submission.'
             }
         },
         clipboard: {
@@ -110,6 +118,22 @@ export const en = {
         coral: "Coral - Clear & Friendly",
         sage: "Sage - Authoritative & Calm",
         verse: "Verse - Dynamic & Expressive"
+    },
+    form: {
+        title: "User Information Form",
+        description: "Please fill out the form below.",
+        nameLabel: "Name",
+        ageLabel: "Age",
+        emailLabel: "Email",
+        submitButton: "Submit",
+        cancelButton: "Cancel",
+        opened: "Form opened",
+        openedDescription: "Please fill in the required information.",
+        openedMessage: "Form has been opened. Please ask the user to fill in their information.",
+        submitted: "Form submitted",
+        submittedDescription: "Thank you for submitting the form.",
+        noSubmissions: "No forms have been submitted yet.",
+        lastSubmission: "Last form was submitted on"
     },
     language: "English",
     languagePrompt: "Speak and respond only in English. It is crucial that you maintain your responses in English. If the user speaks in other languages, you should still respond in English."

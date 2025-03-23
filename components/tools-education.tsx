@@ -43,6 +43,14 @@ export function ToolsEducation() {
       name: t('tools.availableTools.scrapeWebsite.name'),
       description: t('tools.availableTools.scrapeWebsite.description'),
     },
+    {
+      name: t('tools.availableTools.showForm.name') || "Show Form",
+      description: t('tools.availableTools.showForm.description') || "Displays a form to collect your name, age, and email.",
+    },
+    {
+      name: t('tools.availableTools.getLastForm.name') || "Last Form Submission",
+      description: t('tools.availableTools.getLastForm.description') || "Shows when you last submitted the form.",
+    },
   ] as const;
 
   return (

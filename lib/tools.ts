@@ -60,6 +60,14 @@ const toolDefinitions = {
                 description: 'The URL to scrape'
             }
         }
+    },
+    showForm: {
+        description: 'Shows a form to collect user information (name, age, email)',
+        parameters: {}
+    },
+    getLastFormSubmission: {
+        description: 'Gets the timestamp of the last form submission',
+        parameters: {}
     }
 } as const;
 

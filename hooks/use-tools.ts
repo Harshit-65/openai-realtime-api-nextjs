@@ -5,9 +5,11 @@ import confetti from 'canvas-confetti'
 import { animate as framerAnimate } from "framer-motion"
 import { useTranslations } from "@/components/translations-context"
 import FirecrawlApp, { ScrapeResponse } from '@mendable/firecrawl-js';
+import { useForm } from "@/hooks/use-form";
 
 export const useToolsFunctions = () => {
   const { t } = useTranslations();
+  const { openForm, getLastFormSubmission } = useForm();
 
   const timeFunction = () => {
     const now = new Date()
@@ -190,12 +192,18 @@ export const useToolsFunctions = () => {
     }
   }
 
+  const showForm = () => {
+    return openForm();
+  }
+
   return {
     timeFunction,
     backgroundFunction,
     partyFunction,
     launchWebsite,
     copyToClipboard,
-    scrapeWebsite
+    scrapeWebsite,
+    showForm,
+    getLastFormSubmission
   }
 }
