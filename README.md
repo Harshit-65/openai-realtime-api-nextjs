@@ -28,7 +28,19 @@ cd openai-realtime-api-nextjs
 Create a `.env` file in the root directory:
 ```env
 OPENAI_API_KEY=your-openai-api-key
+NEXT_PUBLIC_OPENWEATHER_API_KEY=your-openweather-api-key
 ```
+
+#### Getting an OpenWeatherMap API Key
+To use the weather functionality, you'll need to obtain an API key from OpenWeatherMap:
+
+1. Visit [OpenWeatherMap](https://home.openweathermap.org/) and sign up for an account if you don't have one
+2. After signing in, go to your profile or dashboard
+3. Navigate to the "API Keys" section
+4. Generate a new API key (the free tier is sufficient for this application)
+5. Copy the API key and add it to your `.env` file as shown above
+
+Note: New API keys may take a few hours to activate.
 
 ### 3. Install Dependencies
 If using **Node.js**:
@@ -71,5 +83,5 @@ This project is licensed under the MIT License. See the `LICENSE` file for detai
 - [OpenAI](https://openai.com/) for their API and models.
 - [Next.js](https://nextjs.org/) for the framework.
 - [Tailwind CSS](https://tailwindcss.com/) for styling.
-- [Simon Willison’s Weblog](https://simonwillison.net/2024/Dec/17/openai-webrtc/) for inspiration
+- [Simon Willison's Weblog](https://simonwillison.net/2024/Dec/17/openai-webrtc/) for inspiration
 - [Originator: skrivov](https://github.com/skrivov/openai-voice-webrtc-next) for the WebRTC and Nextjs implementation
